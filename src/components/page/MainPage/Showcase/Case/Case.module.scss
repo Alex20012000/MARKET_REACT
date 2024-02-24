@@ -1,0 +1,53 @@
+@import '../../../../../assets/styles/utils/index.scss';
+
+.li {
+    list-style: none;
+    text-align: start;
+}
+
+.wrapper {
+    display: flex;
+    width: 424px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 36px;
+    justify-content: center;
+}
+
+.img {
+    align-self: center;
+}
+
+.author, .desc {
+    color: $shuttle-gray;
+    font-size: 10px;
+}
+
+.author {
+    margin-bottom: 4px;
+}
+
+.name {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.desc {
+    margin-bottom: 16px;
+}
+
+.price {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.loadBtn {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}

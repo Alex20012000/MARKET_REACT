@@ -1,0 +1,43 @@
+@import '../../../../assets/styles/utils/index.scss';
+
+.categories {
+    padding: 45px 0 80px;
+    background-color: $whisper;
+    flex-basis: 28%;
+    width: 100%;
+    max-width: 416px;
+    display: flex;
+    gap: 23px;
+    flex-direction: column;
+    padding-left: 158px;
+    list-style: none;
+    
+
+    &Btn {
+        background: none;
+        border: none;
+        font-size: 12px;
+        font-weight: 500;
+        color: $shuttle-gray;
+        cursor: pointer;
+
+        &.active {
+            position: relative;
+            color: $mirage;
+            font-size: 16px;
+            font-weight: 700;
+
+            &:before {
+                content: "";
+                display: block;
+                width: 6px;
+                height: 6px;
+                background: $cold-purple;
+                border-radius: 50%;
+                position: absolute;
+                left: -20px;
+                top: calc(50% - 3px);
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../../../assets/styles/utils/index.scss';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 75px;
+    grid-row-gap: 85px;
+}
+
+.wrapButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 96px;
+}
