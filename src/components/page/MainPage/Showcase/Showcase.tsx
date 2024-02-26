@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Case from './Case/Case';
+import Case from '../../../common/Case/Case';
 import styles from './Showcase.module.scss'; 
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { getBooksAction } from '@/lib/slices/books/actions/getBooksAction';

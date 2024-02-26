@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import booksReducer from './slices/books/slices'
+import booksReducer from './slices/books/slices';
+import basketReducer from './slices/basket/slices';
 import { persistConfig } from './persist';
 import { persistReducer, persistStore } from 'redux-persist';
 import {
@@ -11,7 +12,7 @@ import {
     REGISTER,
 } from 'redux-persist'
 
-const rootReducer = combineReducers({ booksReducer })
+const rootReducer = combineReducers({ booksReducer, basketReducer })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import styles from './Case.module.scss';
 
 import cn from 'classnames';
@@ -8,6 +8,8 @@ import Image from 'next/image';
 import StarActiveSvg from '@/assets/images/star-active.svg'
 import StarUnactiveSvg from '@/assets/images/star-unactive.svg'
 import Button from '@/components/common/Button/Button';
+import { useAppDispatch } from '@/lib/hooks';
+import { addBookInBasket } from '@/lib/slices/basket/slices';
 
 
 interface  Props {
@@ -21,11 +23,17 @@ const myLoader = ({ src }: { src: string }) => {
 }
 
 const Case: FC<Props> = ({data}) => {
+    const dispatch = useAppDispatch();
+
     const starActive = generateStars(data.volumeInfo?.averageRating || 0)
     const starUnActive = generateStars(data.volumeInfo?.averageRating
         ? 5 - data.volumeInfo?.averageRating 
         : 5);
         
+    const addToBasket = useCallback(() => {
+        dispatch(addBookInBasket({count: 1, book: data}))
+    }, [])    
+
     return(
         <li className = {styles.li}>
             <div className = {styles.wrapper}>
@@ -68,7 +76,7 @@ const Case: FC<Props> = ({data}) => {
                         ? <strong className = {styles.price}>{data.saleInfo.listPrice.amount} {data.saleInfo.listPrice.currencyCode}</strong>
                         : ''
                     }
-                    <Button className = {cn(styles.buy, styles.button)}>BUY NOW</Button>
+                    <Button onClick = {addToBasket} className = {cn(styles.buy, styles.button)}>BUY NOW</Button>
                 </div>
             </div>
         </li>
