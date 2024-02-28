@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 
 import Image from 'next/image';
@@ -9,8 +10,12 @@ import Search from '@/assets/images/search.svg';
 import Cart from '@/assets/images/cart.svg';
 
 import styles from './Header.module.scss';
+import { useAppSelector } from '@/lib/hooks';
+import getListBasket from '@/lib/slices/basket/selectors/getListBasket';
+import Link from 'next/link';
 
 const Header = () => {
+    const basketList = useAppSelector(getListBasket);
     return (
         <header className = {styles.header}>
             <div className = {styles.container}>
@@ -46,10 +51,10 @@ const Header = () => {
                             </button>
                         </li>
                         <li>
-                            <button className = {cn(styles.header__actions__btn, styles.header__actions__btn__cart)}>
+                            <Link href = {'/basket'} className = {cn(styles.header__actions__btn, styles.header__actions__btn__cart)}>
                                 <Image src = {Cart} alt = 'cart' />
-                                <span className = {styles.header__cart__amount}>0</span>
-                            </button>
+                                <span className = {styles.header__cart__amount}>{basketList?.length || 0}</span>
+                            </Link>
                         </li>
                     </ul>
                 </div>

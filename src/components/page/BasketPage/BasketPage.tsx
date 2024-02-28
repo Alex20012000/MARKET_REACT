@@ -7,9 +7,10 @@ import BasketCard from './BasketCard/BasketCard';
 
 const BasketPage = () => {
     const list = useSelector(getListBasket);
+    console.log(list, 'list');
+    
     return <>
         <section className = {styles.content}>
-            <h1 className = {styles.title}>SHOPPING CART</h1>
             <table>
                 <thead>
                     <tr>

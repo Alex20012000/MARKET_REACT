@@ -1,8 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import booksReducer from './slices/books/slices';
 import basketReducer from './slices/basket/slices';
-import { persistConfig } from './persist';
+import { persistRootConfig, persistBasketConfig } from './persist';
 import { persistReducer, persistStore } from 'redux-persist';
+
 import {
     FLUSH,
     REHYDRATE,
@@ -12,12 +13,11 @@ import {
     REGISTER,
 } from 'redux-persist'
 
-const rootReducer = combineReducers({ booksReducer, basketReducer })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = combineReducers({ booksReducer, basketReducer: persistReducer(persistBasketConfig, basketReducer) }) ;
 
 export const store = () => configureStore({
-    reducer: persistedReducer,
+    reducer: persistReducer(persistRootConfig, persistedReducer),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

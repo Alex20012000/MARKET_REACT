@@ -18,7 +18,7 @@ const BasketCard: FC<Props> = ({card}) => {
         dispatch(setBookCount({id: card.id, count}));
     }, [count]);
 
-    const counter = () => <input value = {count} onChange = {(e) => {setCount(+e.currentTarget.value)}}/>;
+    const counter = () => <input value = {count} onChange = {(e) => {setCount(Number(e.currentTarget.value))}}/>;
 
     return(
         <tr className = {styles.wrapper}>
