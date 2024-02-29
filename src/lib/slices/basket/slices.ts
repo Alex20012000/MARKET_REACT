@@ -205,7 +205,7 @@ const initialState: SliceBasket = {
     list: null
 };
 
-const basketSlice = createSlice({
+export const basketSlice = createSlice({
     name: 'basket',
     initialState,
     reducers: {

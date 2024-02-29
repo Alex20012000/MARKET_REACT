@@ -22,19 +22,19 @@ const BasketCard: FC<Props> = ({card}) => {
 
     return(
         <tr className = {styles.wrapper}>
-            <td>
+            <td className =  {styles.block}>
                 <Case data = {card} /> 
             </td>
-            <td>
+            <td className = {styles.block1}>
                 {counter()}
             </td>
-            <td>
+            <td className = {styles.block2}>
                 <span className = {styles.price}>
                     {card.saleInfo?.listPrice?.amount}
                     {card.saleInfo?.listPrice?.currencyCode}
                 </span>
             </td>
-            <td>
+            <td className = {styles.block3}>
                 <div>
                     Shipping: delivery
                 </div>

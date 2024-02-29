@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import booksReducer from './slices/books/slices';
-import basketReducer from './slices/basket/slices';
-import { persistRootConfig, persistBasketConfig } from './persist';
+import booksReducer, { booksSlice } from './slices/books/slices';
+import basketReducer, { basketSlice } from './slices/basket/slices';
 import { persistReducer, persistStore } from 'redux-persist';
 
 import {
@@ -12,23 +11,30 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist'
+import { persistConfig } from './persist';
 
 
-const persistedReducer = combineReducers({ booksReducer, basketReducer: persistReducer(persistBasketConfig, basketReducer) }) ;
 
-export const store = () => configureStore({
-    reducer: persistReducer(persistRootConfig, persistedReducer),
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-    }),
-});
+const rootReducer = combineReducers({
+	booksReducer: booksSlice.reducer,
+    basketReducer: basketSlice.reducer,
+    
+})
+export const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export const persistor = persistStore(store());
+export const store = configureStore({
+	reducer: persistedReducer,
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+			}
+		})
+})
 
-export type AppStore = ReturnType<typeof store>
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+export const persistor = persistStore(store)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 export type StoreGetState = () => RootState;

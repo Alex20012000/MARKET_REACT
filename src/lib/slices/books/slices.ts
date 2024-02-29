@@ -66,7 +66,7 @@ const initialState: SliceBooks = {
     error: null
 };
 
-const booksSlice = createSlice({
+export const booksSlice = createSlice({
     name: 'books',
     initialState,
     reducers: {

@@ -11,13 +11,13 @@ const BasketPage = () => {
     
     return <>
         <section className = {styles.content}>
-            <table>
+            <table className = {styles.contentTable}>
                 <thead>
-                    <tr>
+                    <tr className = {styles.titleRow}>
                         <th scope="col">ITEM</th>
-                        <th scope="col">QUANTITY</th>
-                        <th scope="col">PRICE</th>
-                        <th scope="col">DELIVERY</th>
+                        <th className = {styles.title} scope="col">QUANTITY</th>
+                        <th className = {styles.title} scope="col">PRICE</th>
+                        <th className = {styles.title} scope="col">DELIVERY</th>
                     </tr>
                 </thead>
                 <tbody>
