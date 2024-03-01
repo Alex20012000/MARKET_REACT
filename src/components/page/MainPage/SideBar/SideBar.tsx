@@ -1,8 +1,10 @@
 import { Category } from '@/lib/slices/books/slices';
 import styles from './SideBar.module.scss';
 import Button from '@/components/common/Button/Button';
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { setCategoryAction } from '@/lib/slices/books/actions/setCategoryAction';
+import cn from 'classnames';
+import getCategory from '@/lib/slices/books/selectors/getCategory';
 
 const configMenu = [
     {name: Category.Architecture, title: Category.Architecture},
@@ -25,6 +27,9 @@ const configMenu = [
 
 const SideBar = () => {
     const dispatch = useAppDispatch();
+    
+    const category = useAppSelector(getCategory);
+
     const selectCategory = (category: Category) => () => {
         dispatch(setCategoryAction(category))
     }
@@ -34,7 +39,7 @@ const SideBar = () => {
                 <li>
                     <div 
                         onClick = {selectCategory(item.name)}
-                        className = {styles.categoriesBtn}
+                        className = {cn(styles.categoriesBtn, {[styles.categoriesBtn_active]: category === item.name})}
                     >
                         {item.title}
                     </div>

@@ -20,8 +20,9 @@
         font-weight: 500;
         color: $shuttle-gray;
         cursor: pointer;
+        text-align: left;
 
-        &.active {
+        &_active {
             position: relative;
             color: $mirage;
             font-size: 16px;

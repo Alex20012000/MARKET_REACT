@@ -10,45 +10,44 @@ import Search from '@/assets/images/search.svg';
 import Cart from '@/assets/images/cart.svg';
 
 import styles from './Header.module.scss';
-import { useAppSelector } from '@/lib/hooks';
-import getListBasket from '@/lib/slices/basket/selectors/getListBasket';
+import useLoginPopupToggle, { useAppSelector } from '@/lib/hooks';
+import getListBasket from '@/lib/slices/basket/selector/getListBasket';
 import Link from 'next/link';
+import LoginPopup from './PopUpLog/LoginPopup';
+
 
 const Header = () => {
+    const [isLoginPopupOpen, toggleLoginPopup] = useLoginPopupToggle();
     const basketList = useAppSelector(getListBasket);
     return (
         <header className = {styles.header}>
             <div className = {styles.container}>
                 <div className = {styles.header__wrapper}>
-                    <a href = '/'>
+                    <Link href = '/'>
                         <Image src = {Logo} alt = 'Logo Bookshop' />
-                    </a>
+                    </Link>
                     <nav className = {styles.header__nav}>
                         <div className = {styles.header__list}>
-                            <a href = '#' className = {styles.header__nav__link_active}>
+                            <Link href = '/' className = {styles.header__nav__link_active}>
                                 books
-                            </a>
-                            <a href = '#' className = {styles.header__nav__link}>
+                            </Link>
+                            <Link href = '#' className = {styles.header__nav__link}>
                                 audiobooks
-                            </a>
-                            <a href = '#' className = {styles.header__nav__link}>
+                            </Link>
+                            <Link href = '#' className = {styles.header__nav__link}>
                                 Stationery & gifts
-                            </a>
-                            <a href = '#' className = {styles.header__nav__link}>
+                            </Link>
+                            <Link href = '#' className = {styles.header__nav__link}>
                                 blog
-                            </a>
+                            </Link>
                         </div>
                     </nav>
                     <ul className = {styles.header__actions}>
-                        <li>
-                            <button className = {styles.header__actions__btn}>
+                        <li className = {styles.account}>
+                            <button onClick = {toggleLoginPopup} className = {styles.header__actions__btn}>
                                 <Image src = {Account} alt = 'account' />
                             </button>
-                        </li>
-                        <li>
-                            <button className = {styles.header__actions__btn}>
-                                <Image src = {Search} alt = 'search' />
-                            </button>
+                            {isLoginPopupOpen && <LoginPopup />}
                         </li>
                         <li>
                             <Link href = {'/basket'} className = {cn(styles.header__actions__btn, styles.header__actions__btn__cart)}>

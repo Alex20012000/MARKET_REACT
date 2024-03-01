@@ -9,11 +9,12 @@ import StarActiveSvg from '@/assets/images/star-active.svg'
 import StarUnactiveSvg from '@/assets/images/star-unactive.svg'
 import Button from '@/components/common/Button/Button';
 import { useAppDispatch } from '@/lib/hooks';
-import { addBookInBasket } from '@/lib/slices/basket/slices';
+import { adBookInBasketAction } from '@/lib/slices/basket/actions/addBookInBasketAction';
 
 
 interface  Props {
-    data: Book
+    data: Book,
+    isMini?: boolean
 }
 
 const generateStars = (count: number) => Array.from(Array(count).keys())
@@ -22,7 +23,7 @@ const myLoader = ({ src }: { src: string }) => {
     return `http://books.google.com/books/content?id=${src}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api`
 }
 
-const Case: FC<Props> = ({data}) => {
+const Case: FC<Props> = ({data, isMini}) => {
     const dispatch = useAppDispatch();
 
     const starActive = generateStars(data.volumeInfo?.averageRating || 0)
@@ -31,7 +32,7 @@ const Case: FC<Props> = ({data}) => {
         : 5);
         
     const addToBasket = useCallback(() => {
-        dispatch(addBookInBasket({count: 1, book: data}))
+        dispatch(adBookInBasketAction({count: 1, book: data}))
     }, [])    
 
     return(
@@ -42,8 +43,8 @@ const Case: FC<Props> = ({data}) => {
                     className = {styles.img} 
                     src = {data.id} 
                     alt = 'book' 
-                    width = {212} 
-                    height = {300}
+                    width = {!isMini ? 212 : 102} 
+                    height = {!isMini ? 300 : 145} 
                 />
                 <div className = {styles.info}>
                     <p className = {styles.author}>
@@ -69,14 +70,16 @@ const Case: FC<Props> = ({data}) => {
                                 : ''
                         }</span>
                     </div>
-                    <p className = {styles.desc}>
-                        {data.volumeInfo?.description?.slice(0, 100) || ''}...
-                    </p>
-                    { data.saleInfo?.listPrice?.amount
-                        ? <strong className = {styles.price}>{data.saleInfo.listPrice.amount} {data.saleInfo.listPrice.currencyCode}</strong>
-                        : ''
-                    }
-                    <Button onClick = {addToBasket} className = {cn(styles.buy, styles.button)}>BUY NOW</Button>
+                    {!isMini && <> 
+                        <p className = {styles.desc}>
+                            {data.volumeInfo?.description?.slice(0, 100) || ''}...
+                        </p>
+                        { data.saleInfo?.listPrice?.amount
+                            ? <strong className = {styles.price}>{data.saleInfo.listPrice.amount} {data.saleInfo.listPrice.currencyCode}</strong>
+                            : ''
+                        }
+                        <Button onClick = {addToBasket} className = {cn(styles.buy, styles.button)}>BUY NOW</Button>
+                    </>}
                 </div>
             </div>
         </li>

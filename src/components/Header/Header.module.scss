@@ -1,5 +1,9 @@
 @import '../../assets/styles/utils/index.scss';
 
+.account {
+    position: relative;
+}
+
 .header {
     
     top: 0;
@@ -28,6 +32,10 @@
 
             &_active {
                 color: $black;
+                font-weight: 700;
+    color: #5c6a79;
+    text-decoration: none;
+    text-transform: uppercase;
             }
         }
     }

@@ -5,22 +5,31 @@
     line-height: 22px;
 }
 
+
 .block {
-    padding-bottom: 70px;
+    text-align: left;
+    padding-bottom: 77px;
 }
 
 .block1 {
-    padding-left: 122px;
-    padding-bottom: 70px;
+    width: 40% ;
 }
 
-.block2 {
-    padding-left: 102px;
-    padding-bottom: 70px;
+.countInput {
+    text-align: center;
+    border: none;
+    width: 95px; 
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
 }
 
-.block3 {
-    padding-left: 198px;
-    padding-bottom: 70px;
+.counter {
+    display: flex;
+    height: 45px;
+    border: solid 1px #EEEDF5;
+    width: max-content;
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
 }
-

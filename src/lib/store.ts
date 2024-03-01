@@ -12,13 +12,14 @@ import {
     REGISTER,
 } from 'redux-persist'
 import { persistConfig } from './persist';
+import { authSlice } from './slices/auth/slices';
 
 
 
 const rootReducer = combineReducers({
 	booksReducer: booksSlice.reducer,
     basketReducer: basketSlice.reducer,
-    
+    authReducer: authSlice.reducer,
 })
 export const persistedReducer = persistReducer(persistConfig, rootReducer)
 
